@@ -20,8 +20,13 @@ type
     [MVCPath('/efetuarPedido')]
     [MVCHTTPMethod([httpPOST])]
     procedure efetuarPedido(const AContext: TWebContext);
-  end;
 
+    [MVCDoc('Consultar pedido "200: OK"')]
+    [MVCPath('/consultarPedido/($ADocumentoCliente)')]
+    [MVCHTTPMethod([httpGET])]
+    procedure consultarPedido(const ADocumentoCliente: String);
+
+  end;
 implementation
 
 uses
@@ -33,12 +38,32 @@ uses
 
 { TApp1MainController }
 
+procedure TPizzariaBackendController.consultarPedido(Const ADocumentoCliente: string);
+var
+  oPedidoRetornoDTO: TPedidoRetornoDTO;
+  oPedidoService: TPedidoService;
+begin
+  try
+    oPedidoService :=  TPedidoService.Create;
+    oPedidoRetornoDTO := oPedidoService.consultarPedido(ADocumentoCliente);
+    try
+      Render(TJson.ObjectToJsonString(oPedidoRetornoDTO));
+    finally
+      oPedidoRetornoDTO.Free
+    end;
+    Log.Info('==>Executou o método ', 'efetuarPedido');
+  except
+    on E: Exception do
+          Render(E);
+   end;
+end;
+
 procedure TPizzariaBackendController.efetuarPedido(const AContext: TWebContext);
 var
   oEfetuarPedidoDTO: TEfetuarPedidoDTO;
   oPedidoRetornoDTO: TPedidoRetornoDTO;
 begin
-  oEfetuarPedidoDTO := AContext.Request.BodyAs<TEfetuarPedidoDTO>;
+  oEfetuarPedidoDTO := TJson.JsonToObject<TEfetuarPedidoDTO>(AContext.Request.Body);
   try
     with TPedidoService.Create do
     try
@@ -51,6 +76,7 @@ begin
     oEfetuarPedidoDTO.Free;
   end;
   Log.Info('==>Executou o método ', 'efetuarPedido');
+
 end;
 
 end.

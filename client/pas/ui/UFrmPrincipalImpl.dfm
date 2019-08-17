@@ -1,9 +1,9 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = 'Pizzaria'
-  ClientHeight = 327
-  ClientWidth = 597
+  Caption = 'Pedido de Pizza'
+  ClientHeight = 341
+  ClientWidth = 596
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,65 +14,14 @@ object Form1: TForm1
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object GroupBox1: TGroupBox
-    Left = 0
-    Top = 0
-    Width = 597
-    Height = 58
-    Align = alTop
-    TabOrder = 0
-    object edtDocumentoCliente: TLabeledEdit
-      Left = 12
-      Top = 25
-      Width = 214
-      Height = 21
-      EditLabel.Width = 213
-      EditLabel.Height = 13
-      EditLabel.Caption = 'Informe o N'#250'mero do Documento do CLiente'
-      TabOrder = 0
-    end
-    object btn_Acao: TButton
-      Left = 232
-      Top = 23
-      Width = 97
-      Height = 23
-      Caption = 'Fazer Pedido'
-      TabOrder = 1
-      OnClick = btn_AcaoClick
-    end
-    object edtPortaBackend: TLabeledEdit
-      Left = 487
-      Top = 25
-      Width = 107
-      Height = 21
-      EditLabel.Width = 112
-      EditLabel.Height = 13
-      EditLabel.Caption = 'Porta Pizzaria Backend:'
-      TabOrder = 2
-      Text = '8080'
-      Visible = False
-    end
-    object edtEnderecoBackend: TLabeledEdit
-      Left = 338
-      Top = 25
-      Width = 143
-      Height = 21
-      EditLabel.Width = 131
-      EditLabel.Height = 13
-      EditLabel.Caption = 'Endere'#231'o Pizzaria Backend:'
-      TabOrder = 3
-      Text = 'http://localhost'
-      Visible = False
-    end
-  end
   object pgPedido: TPageControl
     Left = 0
-    Top = 58
-    Width = 597
-    Height = 269
+    Top = 73
+    Width = 596
+    Height = 268
     ActivePage = tsPedido
     Align = alClient
-    TabOrder = 1
+    TabOrder = 0
     OnChange = pgPedidoChange
     object tsPedido: TTabSheet
       Caption = 'Efetuar Pedido'
@@ -102,9 +51,7 @@ object Form1: TForm1
         Top = 29
         Width = 193
         Height = 21
-        ItemIndex = 0
         TabOrder = 0
-        Text = 'enPequena'
         Items.Strings = (
           'enPequena'
           'enMedia'
@@ -115,9 +62,7 @@ object Form1: TForm1
         Top = 80
         Width = 193
         Height = 21
-        ItemIndex = 0
         TabOrder = 1
-        Text = 'enCalabresa'
         Items.Strings = (
           'enCalabresa'
           'enMarguerita'
@@ -125,7 +70,7 @@ object Form1: TForm1
       end
       object mmRetornoWebService: TMemo
         Left = 230
-        Top = 29
+        Top = 30
         Width = 335
         Height = 187
         Color = clCream
@@ -144,15 +89,11 @@ object Form1: TForm1
     object tsCosnulta: TTabSheet
       Caption = 'Consultar Pedido'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object gbResumo: TGroupBox
         Left = 0
         Top = 0
-        Width = 589
-        Height = 241
+        Width = 588
+        Height = 240
         Align = alClient
         Caption = '  Resumo do Pedido'
         Font.Charset = DEFAULT_CHARSET
@@ -165,8 +106,8 @@ object Form1: TForm1
         object mmResumoPedido: TMemo
           Left = 2
           Top = 15
-          Width = 585
-          Height = 224
+          Width = 584
+          Height = 223
           Align = alClient
           Color = clCream
           Font.Charset = DEFAULT_CHARSET
@@ -179,6 +120,46 @@ object Form1: TForm1
           TabOrder = 0
         end
       end
+    end
+  end
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 0
+    Width = 596
+    Height = 73
+    Align = alTop
+    TabOrder = 1
+    object edtEnderecoBackend: TLabeledEdit
+      Left = 376
+      Top = 34
+      Width = 161
+      Height = 21
+      EditLabel.Width = 131
+      EditLabel.Height = 13
+      EditLabel.Caption = 'Endere'#231'o Pizzaria Backend:'
+      Enabled = False
+      TabOrder = 0
+      Text = 'http://localhost:8080/soap/IPizzariaBackendController'
+      Visible = False
+    end
+    object edtDocumentoCliente: TLabeledEdit
+      Left = 12
+      Top = 34
+      Width = 214
+      Height = 21
+      EditLabel.Width = 213
+      EditLabel.Height = 13
+      EditLabel.Caption = 'Informe o N'#250'mero do Documento do CLiente'
+      TabOrder = 1
+    end
+    object btn_Acao: TButton
+      Left = 232
+      Top = 33
+      Width = 97
+      Height = 23
+      Caption = 'Fazer Pedido'
+      TabOrder = 2
+      OnClick = btn_AcaoClick
     end
   end
 end
